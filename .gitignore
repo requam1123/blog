@@ -1,0 +1,13 @@
+# 不上传 site 留给服务器本地编译
+site/
+
+# 选择性忽略docs部分文件
+
+
+docs/CS61A.md
+docs/Data structure.md
+docs/Every week English.md
+
+# 不上传虚拟环境
+
+venv/
