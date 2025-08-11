@@ -11,3 +11,6 @@ docs/Every week English.md
 # 不上传虚拟环境
 
 venv/
+
+# fucking macOS
+.DS_Store
