@@ -3,11 +3,29 @@ repo_url: https://github.com/requam1123/blog
 repo_name: quam1123_blog
 nav :
   - 首页: index.md
-  - What problems I meet: What Problems I meet？.md
-  - Learn:
-    - CTF : ctf.md
-    - small tips: 
-      - How_to_write_gitignore.md
+  # - What problems I meet: What Problems I meet？.md
+
+  - CTF : 
+    - CTF101课程 :
+      - misc :
+        - ctf/misc/index.md
+        - misc_lab1 : ctf/misc/misc_lab1/misc_lab1.md
+        - misc_lab2 : ctf/misc/misc_lab2/misc_lab2.md
+        - misc_lab3 : ctf/misc/misc_lab3/misc_lab3.md
+      - web :
+        - ctf/web/index.md
+        - web_lab1 : ctf/web/web_lab1/web_lab1.md
+        - web_lab2 : ctf/web/web_lab2/web_lab2.md
+        - web_lab3 : ctf/web/web_lab3/web_lab3.md
+    - 偷偷刷题 : 
+      - ctf/self/index.md
+
+  - small tips: 
+    - How_to_write_gitignore.md
+
+  - 指令笔记本 :
+    - ins/index.md
+    - 网站操作 : ins/website/instruction_note.md
 theme: 
   name: material 
   features:
@@ -22,7 +40,7 @@ theme:
     - navigation.path
     - search.suggest
     - search.highlight
-    # - navigation.indexes
+    - navigation.indexes
     # - toc.integrate
     # - header.autohide
     
