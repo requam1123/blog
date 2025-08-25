@@ -2,30 +2,7 @@
 
 ---
 
-# Challenge 1 (10%)
-1.  拿来题目发现是一张图片带有flag，但是flag只有一半，所以看一下图像的额外信息。
-2.  直接使用v2.3.3版本的binwalk看一下，注意用cargo搭建的最新版binwalk魔法签名有变化，所以反而看不出来这这图片的额外信息。
-    ![binwalk分析结果1](s1.png)
-3.  发现26657字节之后其实是一个新的图片，直接用binwalk提取出来就可以看到另一半的flag。
-    ![提取出的图片](s2.jpg)
-4.  最终flag ：`AAA{the_true_fans_nmb_-1s!}`
 
----
-
-# Challenge 2 (10%)
-1.  进入题目发现这个弹窗很讨厌，并且看起来关不掉的样子，所以想看一下源代码。
-2.  既然f12看不了，直接request一下试试。
-    ![requests请求源代码](m1.png)
-3.  所以直接访问这个url：`https://cdn.zjusec.com/Nov2/img/miao~870F6C667A6CDC0D1F533859E72C48E0.jpg`,就拿到了这个图片。
-4.  也是binwalk跑一下，发现偏移30个字节之后有一个tiff格式的文件。
-5.  用exiftool查看一下信息发现了有一个key：`m1a0@888`
-    ![exiftool查看信息](m2.png)
-6.  接下来尝试steghide解码，因为这个不能对tiff使用所以直接对原图来。
-    ![steghide解码](m3.png)
-7.  找到，发现是一串二进制字符串，file告诉我们这是01字符串，解码得到flag。
-8.  `AAA{D0_Y0u_L1ke_Ste9H1de_M1a0}`
-
----
 
 # Challenge 3
 1.  既然是LSB隐写，直接zsteg启动。
@@ -67,18 +44,3 @@
 9.  但是ai提取出来的flag有几位不太正确，微调一下就通过了(用肉眼判断的)。
 10. flag:`0ops{power_1s_a11_y0u_n55d}`
 
----
-
-# Challenge E: PPC (30%)
-1.  polyglot 
-    1.  这道题要求编写一个代码使其既能被g++编译器编译，又能被python执行，并且读出/flag.txt。
-    2.  既然需要同时符合两个语言的规范，那就先把最简的语言写出来。
-    3.  从这个教程可以知道C++的基本文件流操作：[https://www.runoob.com/cplusplus/cpp-files-streams.html](https://www.runoob.com/cplusplus/cpp-files-streams.html)
-        ![C++代码](pl1.png)
-        ![py代码](pl2.png)
-    4.  现在只需要知道怎么把这两个代码放到一起去同时过编译，从py的视角就很简单，只需要把C的代码全部放在三个引号里面，或者通过`#`注释，就不会被识别。
-    5.  至于在C++里面想要忽略多行代码，处理多行注释之外还有`#if 0 #end`这样的格式,而且这个正好有`#`，在python里面不会报错！
-    6.  所以可以考虑把三个引号放在头部，用`if` `endif`框住，然后写C语句，然后再接另一个`if` `endif`，里面放三个引号和python代码。
-        ![polyglot代码结构](pl3.png)
-    7.  本地测试通过！接下来直接转base64，我直接用在线工具https://www.base64encode.org/
-    8.  然后直接拿下flag：`ZJUCTF{PoLyp1OT_5o_CO0L_maybE_moRe_l4N9uage5_NEX7_tiMe}`

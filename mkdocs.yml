@@ -27,6 +27,8 @@ nav :
     - ins/index.md
     - 网站操作 : ins/website/instruction_note.md
 theme: 
+  logo: head.png
+  favicon: head.png
   name: material 
   features:
     - navigation.tabs   # 导航标签 

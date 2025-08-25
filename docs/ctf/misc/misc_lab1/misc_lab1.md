@@ -59,14 +59,3 @@
     2.  拼接之后用md5计算`OpenHarmony\3.2_calculator_5.0.1_101`。
 5.  `flag{9cbba4ca92014908452e64de19e3e7ad}`
 
----
-
-# Bonus
-1.  这道题是网络密码的爆破，以及一些文件的处理。
-2.  下载下来的安装包解压发现是一个损坏的磁盘文件，用Disk Drill打开之后发现了两个文件，一个是cap流量包文件，一个是.txt.swp，应该是txt文件的交换文件，vim打开时没有保存。
-    ![恢复前的文件列表](b1.png)
-3.  之后就直接`vim -r`，就可以看到文件本来的样子，之后直接`:save`。
-    ![恢复后的文件内容](b2.png)
-4.  然后直接使用aircrack-ng 对这个流量包进行爆破就行。
-    ![aircrack-ng爆破过程](b3.png)
-5.  直接拿到flag:`AAA{0YcWPeLMBp}`
