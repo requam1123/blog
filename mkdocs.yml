@@ -19,9 +19,14 @@ nav :
         - web_lab3 : ctf/web/web_lab3/web_lab3.md
     - 偷偷刷题 : 
       - ctf/self/index.md
-
+  - 计算机系统 :
+    - CSAPP :
+      - csapp/csapp_notes.md
   - small tips: 
     - How_to_write_gitignore.md
+    - build_web/build_web.md
+  - Learn~ing :
+    - flask/flask_study.md 
 
   - 指令笔记本 :
     - ins/index.md
