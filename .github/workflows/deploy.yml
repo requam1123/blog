@@ -20,7 +20,6 @@ jobs:
     # 因为代码就在本机执行，不需要“远程”连接
 
     # 【关键修改 3】直接执行 Shell 命令
-    # 因为 Runner 就在服务器上，直接 cd 到你的博客目录拉取代码即可
     - name: Deploy via Local Git Pull
       run: |
         cd ~/blog/My-blog/
