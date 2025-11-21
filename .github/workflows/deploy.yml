@@ -7,26 +7,21 @@ on:
 
 jobs:
   deploy:
+    # 【关键修改 1】这里改成 self-hosted，任务就会发给你刚才配置的那台机器
     runs-on: self-hosted
     
     steps:
+    # 这一步会将代码拉取到 runner 的临时目录 (_work 文件夹)
+    # 主要是为了记录日志和确保环境正常，建议保留
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 配置 SSH Key (用于登录你的服务器)
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.SSH_PRIVATE_KEY }} 
-        known_hosts: 'placeholder'
-        if_key_exists: replace
+    # 【关键修改 2】不需要安装 SSH Key，也不需要 ssh-keyscan 了
+    # 因为代码就在本机执行，不需要“远程”连接
 
-    # 把服务器加入信任列表
-    - name: Adding Known Hosts
-      run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-
-    # 【修改处】远程执行命令
-    - name: Deploy via Remote Git Pull
+    # 【关键修改 3】直接执行 Shell 命令
+    # 因为 Runner 就在服务器上，直接 cd 到你的博客目录拉取代码即可
+    - name: Deploy via Local Git Pull
       run: |
-        ssh ${{ secrets.USERNAME }}@${{ secrets.SERVER_IP }} \
-        "cd ~/blog/My-blog/ && git pull"
+        cd ~/blog/My-blog/
+        git pull
