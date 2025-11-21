@@ -10,14 +10,17 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    # 【删除】把下面这几行删掉，因为国内服务器下载这个插件太慢了
-    # - name: Checkout code
-    #   uses: actions/checkout@v4
-
-    # 【保留】直接去你的文件夹里拉取更新
     - name: Deploy via Local Git Pull
       run: |
         echo "开始部署..."
         cd ~/blog/My-blog/
         git pull
         echo "部署完成！"
+    
+    - name: release on web
+      run: |
+        echo "开始发布..."
+        cd ~/blog/My-blog/
+        source ./venv/bin/activate
+        mkdocs build
+        rsync -a --delete site/ /var/www/quam1123.top/
