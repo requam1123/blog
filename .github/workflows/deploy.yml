@@ -7,20 +7,17 @@ on:
 
 jobs:
   deploy:
-    # 【关键修改 1】这里改成 self-hosted，任务就会发给你刚才配置的那台机器
     runs-on: self-hosted
     
     steps:
-    # 这一步会将代码拉取到 runner 的临时目录 (_work 文件夹)
-    # 主要是为了记录日志和确保环境正常，建议保留
-    - name: Checkout code
-      uses: actions/checkout@v4
+    # 【删除】把下面这几行删掉，因为国内服务器下载这个插件太慢了
+    # - name: Checkout code
+    #   uses: actions/checkout@v4
 
-    # 【关键修改 2】不需要安装 SSH Key，也不需要 ssh-keyscan 了
-    # 因为代码就在本机执行，不需要“远程”连接
-
-    # 【关键修改 3】直接执行 Shell 命令
+    # 【保留】直接去你的文件夹里拉取更新
     - name: Deploy via Local Git Pull
       run: |
+        echo "开始部署..."
         cd ~/blog/My-blog/
         git pull
+        echo "部署完成！"
